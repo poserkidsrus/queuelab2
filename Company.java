@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Comparator;
 
-/**
- * Write a description of class Company here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+//@Keil Barracliffe
+//@Jeffrey Ackah
 public class Company
 {
-    // instance variables - replace the example below with your own
+    
     private Queue<Department> directory;
     private Scanner scanner;
     private Queue<Executive> hiringPool;
@@ -25,33 +21,32 @@ public class Company
      */
     public Company()
     {
-        // initialise instance variables
         directory = new LinkedList<>();
         scanner = new Scanner(System.in);
         hiringPool = new LinkedList<>();
         unemployed = new ArrayList<>();
 
     }
-
+    //returns directory for methods to use
     public Queue<Department> getDirectory()
     {
         return directory;
     }
-
+    //sets name of company
     public void setName(String name)
     {
         this.name = name;
     }
-
+    //adds department to directory
     public void add(Department newDepartment)
     {
         newDepartment = new Department();
         System.out.println("What is the name of this Department?");
         String namer = scanner.nextLine();
         newDepartment.setName(namer);
-        directory.add(newDepartment);
+        getDirectory().add(newDepartment);
         System.out.println("Current departments: ");
-        for(Department dept : directory)
+        for(Department dept : getDirectory())
         {
             System.out.print(dept.getName());
             System.out.print(" ");
@@ -217,7 +212,6 @@ public class Company
     {
         System.out.println("For which department are you requesting payroll?");
         String paybyDept = scanner.nextLine();
-        ArrayList<Executive> temp = new ArrayList<>();
         Department deptCheck = new Department();
         for(Department dept : getDirectory())
         {
@@ -225,32 +219,29 @@ public class Company
             if(dept.getName().equalsIgnoreCase(paybyDept))
             {
                 deptCheck = dept;
-                deptCheck.getEmployees();
-                int i;
-                int j;
-                for(Executive exec : deptCheck.getEmployees())
-                {
-                    temp.add(exec);
-                }
-                temp.sort(Comparator.comparing(Executive::getStartingDate));
-                for(i = 0; i < temp.size(); i++)
-                {
-                    j = temp.size() - i;
-                    temp.get(i).setSalary(j, 40000);
-                }
+                // deptCheck.getEmployees();
+                // int i;
+                // int j;
+                // for(Executive exec : deptCheck.getEmployees())
+                // {
+                    // temp.add(exec);
+                // }
+                // temp.sort(Comparator.comparing(Executive::getStartingDate));
+                // for(i = 0; i < temp.size(); i++)
+                // {
+                    // j = temp.size() - i;
+                    // temp.get(i).setSalary(j-1, 40000);
+                // }
 
                 System.out.println("Salaries for " +dept.getName()+ " department.");
                 System.out.println();
-                for(Executive exec : temp)
+                for(Executive exec : deptCheck.getPayroll())
                 {
                     System.out.println("Employee name: " +exec.getName());
                     System.out.println("Current salary: " +'$'+ "" +exec.getSalary());
                     exec.setSalary(0,0);
                 }
-            }
-            else
-            {
-                break;
+                deptCheck.getPayroll().clear();
             }
         }
     }
@@ -271,34 +262,16 @@ public class Company
             {
                 deptCheck = dept;
                 deptCheck.getEmployees();
-                int i;
-                int j;
                 for(Executive exec : deptCheck.getEmployees())
-                {
-                    temp.add(exec);
-                }
-                temp.sort(Comparator.comparing(Executive::getStartingDate));
-                for(i = 0; i < temp.size(); i++)
-                {
-                    j = temp.size() - i;
-                    temp.get(i).setSalary(j, 40000);
-                }
-
-                for(Executive exec : temp)
                 {
                     exec.getName();
                     if(exec.getName().equalsIgnoreCase(execName))
                     {
                         execTemp = exec;
-                        System.out.println(execTemp.getName());
-                        System.out.println(execTemp.getSalary());
-                        execTemp.setSalary(0,0);
+                        System.out.println("Employee name: " +execTemp.getName());
+                        System.out.println("Current salary: " +'$'+ "" +execTemp.getSalary());
                     }
                 }
-            }
-            else
-            {
-                break;
             }
         }
     }

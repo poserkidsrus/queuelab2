@@ -11,13 +11,13 @@ public class Department
     // instance variables - replace the example below with your own
     private String name;
     private Queue <Executive> employees;
-    private ArrayList<Date> seniority;
+    private ArrayList<Executive> payRoll;
 
     public Department()
     {
         // initialise instance variables
         employees = new LinkedList<>();
-        seniority = new ArrayList<>();
+        payRoll = new ArrayList<>();
     }
     
     public Queue<Executive> getEmployees()
@@ -50,18 +50,27 @@ public class Department
         return name;
     }
 
-    public void startingDateList()
+    public void setSalary()
     {
-        for(Executive exec : getEmployees())
+        ArrayList<Executive> temp = new ArrayList<>();
+        int i;
+        int j;
+        for(Executive exec : this.getEmployees())
+                {
+                    temp.add(exec);
+                }
+        temp.sort(Comparator.comparing(Executive::getStartingDate));
+        for(i = 0; i < temp.size(); i++)
         {
-                seniority.add(exec.getStartingDate());
+            j = temp.size() - i;
+            temp.get(i).setSalary(j-1, 40000);
         }
+        this.payRoll = temp;
     }
 
-    public ArrayList<Date> getStartingDateList()
+    public ArrayList<Executive> getPayroll()
     {
-        startingDateList();
-        return seniority;
+        setSalary();
+        return payRoll;
     }
-
 }

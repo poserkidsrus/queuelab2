@@ -35,7 +35,7 @@ public class Executive
     public void setSalary(int salarySet, int plusBase)
     {
         // put your code here
-        int adjSal = (salarySet-1)*5000;
+        int adjSal = (salarySet)*5000;
         plusBase += adjSal;
         salary += plusBase;
     }

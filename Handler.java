@@ -5,23 +5,20 @@
 import java.util.Scanner;
 public class Handler
 {
-    // instance variables - replace the example below with your own
+    
     private Company companySet;
     private char z;
     private Scanner scanner;
     private Department dept;
     private Executive exec;
-    /**
-     * Constructor for objects of class Handler
-     */
+    //new object of class
     public Handler()
     {
-        // initialise instance variables
+        
         this.scanner = new Scanner(System.in);
-        
-        
-    }
 
+    }
+    //creates company object for this class to use
     public void setCompany()
     {
         Company companySet = new Company();
@@ -30,31 +27,26 @@ public class Handler
         companySet.setName(namer);
         this.companySet = companySet;
     }
-
+    //returns company
     public Company getCompany()
     {
         return companySet;
     }
-
+    //creates department object to pass into the company object
     public void add()
     {
         Department deptSet = new Department();
         getCompany().add(deptSet);
     }
 
+    //creates executive object to pass into the company object
     public void hire()
     {
         Executive execSet = new Executive();
         getCompany().hire(execSet);
     }
     
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
+    //shows menu while program is running
     public void programMenu()
     {
         while (true)
@@ -74,15 +66,17 @@ public class Handler
         }
         
     }
+    
+    //method to select class methods based on input character
     public char menuInput(char z)
     {
         if(Character.toLowerCase(z) == 'a')
         {
-            this.add();
+            add();
         }
          else if (Character.toLowerCase(z) == 'b')
          {
-             this.hire();
+             hire();
         }
         else if(Character.toLowerCase(z) == 'c')
         {
@@ -110,7 +104,7 @@ public class Handler
         }
         return this.z;
     }
-    
+    //method to end program
     public void exit()
     {
         System.out.print("\nChanges Complete\n");
